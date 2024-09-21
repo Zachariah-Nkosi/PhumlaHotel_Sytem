@@ -66,6 +66,7 @@
     <Compile Include="business\Employee.cs" />
     <Compile Include="business\Hotel.cs" />
     <Compile Include="business\Room.cs" />
+    <Compile Include="database\DB.cs" />
     <Compile Include="HomePageForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -185,9 +186,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Database\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="PhumlaKamnandiDatabase.mdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
