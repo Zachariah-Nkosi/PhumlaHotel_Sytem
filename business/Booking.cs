@@ -10,6 +10,7 @@ namespace phumla_kamnandi_83.business
     {
         #region Data Fields
         private int bookingId_;
+        private string empID;
         private int roomId_;
         private string guestID_;
         private DateTime checkInDate_;
@@ -28,6 +29,8 @@ namespace phumla_kamnandi_83.business
             this.totalCost_ = totalCost;
             this.bookingStatus_ = bookingStatus;
         }
+
+        public Booking() { }
         #endregion
 
         #region Property Methods
@@ -38,6 +41,12 @@ namespace phumla_kamnandi_83.business
         public DateTime getCheckOutDate { get {return checkOutDate_; } set {checkOutDate_ = value; } }
         public decimal getTotalCost() { return totalCost_; }
         public string getBookingStatus { get { return bookingStatus_; } set { bookingStatus_ = value; } }
+
+        public string getEmplID
+        {
+            get { return empID; }
+            set { empID = value; }
+        }
         #endregion
 
         #region Display Booking details

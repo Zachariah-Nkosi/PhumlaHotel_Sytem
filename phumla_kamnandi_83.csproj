@@ -67,6 +67,7 @@
     <Compile Include="business\Hotel.cs" />
     <Compile Include="business\Room.cs" />
     <Compile Include="database\DB.cs" />
+    <Compile Include="database\PhumlaKamnandiDB.cs" />
     <Compile Include="HomePageForm.cs">
       <SubType>Form</SubType>
     </Compile>

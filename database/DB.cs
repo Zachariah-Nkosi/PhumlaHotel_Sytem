@@ -13,10 +13,10 @@ namespace phumla_kamnandi_83.database
     public class DB
     {
         #region Data Fields
-        private string strConn = Settings.Default.PhumlaConnString;
-        private DataSet dsMain;
-        private SqlConnection sqlConn;
-        private SqlDataAdapter dataAdapter;
+        protected string strConn = Settings.Default.PhumlaConnString;
+        protected DataSet dsMain;
+        protected SqlConnection sqlConn;
+        protected SqlDataAdapter dataAdapter;
         #endregion
 
         #region Constructor
@@ -72,6 +72,7 @@ namespace phumla_kamnandi_83.database
                 dataAdapter.Update(dsMain, table);  //update database via data adapter
 
                 FillDataSet(sqlLocal, table);       //refresh the dataset
+
                 success = true;
             }
             catch (Exception errObj)

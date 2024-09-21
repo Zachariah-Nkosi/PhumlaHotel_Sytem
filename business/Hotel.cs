@@ -11,28 +11,35 @@ namespace phumla_kamnandi_83.business
         #region Data Fields
         private string hotelID_;
         private string name_;
-        private string location_;
+        private string address;
         private string phone_;
+        private int noOfRooms;
         private List<Room> rooms_;
         #endregion
 
         #region Property Methods
         public string HotelID { get { return hotelID_; } set { hotelID_ = value; } }
         public string HotelName { get; set; }
-        public string Location { get; set; }
+        public string Address { get; set; }
         public string PhoneNumber { get; set; }
+        public int NoOfRooms
+        {
+            get { return noOfRooms; }
+            set { noOfRooms = value; }
+        }
         public List<Room> Rooms { get; set; }
         #endregion
 
         #region Constructor
-        public Hotel(string hotelId, string hotelName, string location, string phoneNumber)
+        public Hotel(string hotelId, string hotelName, string address, string phoneNumber)
         {
             HotelID = hotelId;
             HotelName = hotelName;
-            Location = location;
+            this.address= address;
             PhoneNumber = phoneNumber;
             Rooms = new List<Room>();
         }
+        public Hotel() { }
         #endregion
 
         #region Methods
