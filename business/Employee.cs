@@ -9,7 +9,7 @@ namespace phumla_kamnandi_83.business
     public class Employee : Person
     {
         #region data members
-
+        private string emplID;
         private string password_;
         private Role roleVal; 
         #endregion
@@ -20,9 +20,11 @@ namespace phumla_kamnandi_83.business
         }
 
         #region Constructor
-        public Employee(string id, string name, string phone, string address, Role roleType)
+        public Employee(string id, string employeeID, string password, string name, string phone, string address, Role roleType)
             : base(id, name, phone, address)
         {
+            emplID = employeeID;
+            password_ = password;
             this.roleVal = roleType;
         }
         #endregion
