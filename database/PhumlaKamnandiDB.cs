@@ -94,6 +94,7 @@ namespace phumla_kamnandi_83.database
             Hotel aHotel;
             Booking aBooking;
             Room aRoom;
+            Employee anEmp;
 
             switch (table)
             {
@@ -142,9 +143,51 @@ namespace phumla_kamnandi_83.database
                             aBooking = new Booking();
                             aBooking.getBookingId = Convert.ToInt32(myRow["BookingID"]);
                             aBooking.getEmplID = Convert.ToString(myRow["EmployeeID"]).TrimEnd();
+                            aBooking.getGuestID = Convert.ToString(myRow["GuestID"]).TrimEnd();
+                            aBooking.getNoOfGuests = Convert.ToInt16(myRow["BookingID"]);
+                            aBooking.getRoomNo = Convert.ToString(myRow["RoomNo"]).TrimEnd();
+                            aBooking.getBookingDate = Convert.ToDateTime(myRow["BookingDate"]);
+                            aBooking.getCheckInDate = Convert.ToDateTime(myRow["CheckInDate"]);
+                            aBooking.getCheckOutDate = Convert.ToDateTime(myRow["CheckOutDate"]);
+                            aBooking.getBookingStatus = Convert.ToString(myRow["Status"]).TrimEnd();
+                            bookings.Add(aBooking);
                         }
                     }
-                        break;
+                    break;
+
+                case "Room":
+                    aRoom = new Room();
+                    aRoom.ID = Convert.ToString(myRow["RoomNo"]).TrimEnd();
+                    aRoom.HotelID = Convert.ToString(myRow["HotelID"]).TrimEnd();
+                    aRoom.RoomType = Convert.ToString(myRow["RoomType"]).TrimEnd();
+                    aRoom.PricePerNight = Convert.ToDecimal(myRow["Price"]);
+                    rooms.Add(aRoom);
+                    break;
+                case "Employee":
+                    anEmp = new Employee();
+                    anEmp.ID = Convert.ToString(myRow["ID"]).TrimEnd();
+                    anEmp.EmplID = Convert.ToString(myRow["ID"]).TrimEnd();
+                    anEmp.Password = Convert.ToString(myRow["Password"]);
+                    anEmp.Name = Convert.ToString(myRow["Name"]);
+                    anEmp.Address = Convert.ToString(myRow["Address"]);
+                    anEmp.Phone = Convert.ToString(myRow["Phone"]);
+                    //anEmp.RoleVal = (myRow["Role"]);
+                    string role = Convert.ToString(myRow["Role"]).TrimEnd();
+                    switch (role)
+                    {
+                        case "NoRole":
+                            anEmp.RoleVal = Employee.Role.NoRole;
+                            break;
+                        case "Admin":
+                            anEmp.RoleVal = Employee.Role.Admin;
+                            break;
+                        case "Receptionist":
+                            anEmp.RoleVal = Employee.Role.Receptionist;
+                            break;
+                    }
+
+                    employees.Add(anEmp);
+                    break;
             }
         }
         #endregion

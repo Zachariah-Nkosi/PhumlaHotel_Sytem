@@ -15,8 +15,9 @@ namespace phumla_kamnandi_83.business
         #endregion
         public enum Role
         {
-            Receptionist = 0,
-            Admin = 1
+            NoRole = 0,
+            Receptionist = 1,
+            Admin = 2
         }
 
         #region Constructor
@@ -27,11 +28,19 @@ namespace phumla_kamnandi_83.business
             password_ = password;
             this.roleVal = roleType;
         }
+
+        public Employee() : base()
+        {
+            emplID = string.Empty;
+            password_ = string.Empty;
+            roleVal = Role.NoRole;
+        }
         #endregion
 
         #region Property method
-        //// Role: either "Admin" or "General"
-        //public string Role { get { return role_; } set { role_ = value; } }
+        public string EmplID {  get { return emplID; } set { emplID = value; } }
+        public string Password { get { return password_; } set { password_ = value; } }
+        public Role RoleVal { get { return roleVal; } set { roleVal = value; } }
         #endregion
 
         #region methods
