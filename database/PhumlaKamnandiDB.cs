@@ -74,10 +74,20 @@ namespace phumla_kamnandi_83.database
             employees = new Collection<Employee> ();
 
             FillDataSet(sqlLocal1, table1);
+            Add2Collection(table1);
+
             FillDataSet(sqlLocal2, table2);
+            Add2Collection(table2);
+
             FillDataSet(sqlLocal3, table3);
+            Add2Collection(table3);
+
             FillDataSet(sqlLocal4, table4);
+            Add2Collection(table4);
+
             FillDataSet(sqlLocal5, table5);
+            Add2Collection(table5);
+
         }
         #endregion
 
@@ -142,9 +152,9 @@ namespace phumla_kamnandi_83.database
                         {
                             aBooking = new Booking();
                             aBooking.getBookingId = Convert.ToInt32(myRow["BookingID"]);
-                            aBooking.getEmplID = Convert.ToString(myRow["EmployeeID"]).TrimEnd();
-                            aBooking.getGuestID = Convert.ToString(myRow["GuestID"]).TrimEnd();
-                            aBooking.getNoOfGuests = Convert.ToInt16(myRow["BookingID"]);
+                            aBooking.getEmployeeName = Convert.ToString(myRow["EmployeeName"]).TrimEnd();
+                            aBooking.getGuestName = Convert.ToString(myRow["GuestName"]).TrimEnd();
+                            aBooking.getNoOfGuests = Convert.ToInt16(myRow["NumberOfGuests"]);
                             aBooking.getRoomNo = Convert.ToString(myRow["RoomNo"]).TrimEnd();
                             aBooking.getBookingDate = Convert.ToDateTime(myRow["BookingDate"]);
                             aBooking.getCheckInDate = Convert.ToDateTime(myRow["CheckInDate"]);
@@ -190,6 +200,120 @@ namespace phumla_kamnandi_83.database
                     break;
             }
         }
+
+        public void FillRow(DataRow aRow, Employee anEmployee) {
+            aRow["ID"] = anEmployee.ID;
+            aRow["EmployeeID"] = anEmployee.EmplID;
+            aRow["Name"] = anEmployee.Name;
+            aRow["Address"] = anEmployee.Address;
+            aRow["Phone"] = anEmployee.Phone;
+            Employee.Role role = anEmployee.RoleVal;
+            switch (role)
+            {
+                case Employee.Role.NoRole:
+                    aRow["Role"] = "NoRole";
+                    break;
+                case Employee.Role.Receptionist:
+                    aRow["Role"] = "Receptionist";
+                    break;
+                case Employee.Role.Admin:
+                    aRow["Role"] = "Admin";
+                    break;
+            }
+            //aRow["Role"] = 
+        }
+
+        public void FillRow(DataRow aRow, Guest aGuest)
+        {
+            aRow["ID"] = aGuest.ID;
+            aRow["Name"] = aGuest.Name;
+            aRow["Address"] = aGuest.Address;
+            aRow["Phone"] = aGuest.Phone;
+            aRow["KinName"] = aGuest.KinName;
+            aRow["KinCell"] = aGuest.KinPhone;
+            aRow["CardNo"] = aGuest.Card;
+        }
+
+        public void FillRow(DataRow aRow, Room aRoom)
+        {
+            aRow["RoomNo"] = aRoom.ID;
+            aRow["HotelID"] = aRoom.HotelID;
+            aRow["RoomType"] = aRoom.RoomType;
+            aRow["Price"] = aRoom.PricePerNight;        
+        }
+
+        public void FillRow(DataRow aRow, Hotel aHotel)
+        {
+            aRow["HotelID"] = aHotel.HotelID;
+            aRow["Location"] = aHotel.Location;
+            aRow["Address"] = aHotel.Address;
+            aRow["Phone"] = aHotel.PhoneNumber;
+            aRow["NumOfRooms"] = aHotel.NoOfRooms;
+        }
+
+        public void FillRow(DataRow aRow, Booking aBooking)
+        {
+            aRow["BookingID"] = aBooking.getBookingId;
+            aRow["EmployeeName"] = aBooking.getEmployeeName;
+            aRow["GuestName"] = aBooking.getGuestName;
+            aRow["NumberOfGuests"] = aBooking.getNoOfGuests;
+            aRow["RoomNo"] = aBooking.getRoomNo;
+            aRow["BookingDate"] = aBooking.getBookingDate;
+            aRow["CheckInDate"] = aBooking.getCheckInDate;
+            aRow["CheckOutDate"] = aBooking.getCheckOutDate;
+            aRow["Status"] = aBooking.getBookingStatus;
+        }
+
+
+
+
+
+
         #endregion
+
+        #region Database Operations CRUD
+
+
+        public void DataSetChange(Employee anEmp)
+        {
+            String dataTable = "Employee";
+            DataRow aRow = dsMain.Tables[dataTable].NewRow();//creating a row
+            FillRow(aRow, anEmp);
+            dsMain.Tables[dataTable].Rows.Add(aRow);         //adding the row to the table
+        }
+        public void DataSetChange(Guest aGuest)
+        {
+            String dataTable = "Guest";
+            DataRow aRow = dsMain.Tables[dataTable].NewRow();//creating a row
+            FillRow(aRow, aGuest);
+            dsMain.Tables[dataTable].Rows.Add(aRow);         //adding the row to the table
+        }
+
+        public void DataSetChange(Booking aBooking)
+        {
+            String dataTable = "Booking";
+            DataRow aRow = dsMain.Tables[dataTable].NewRow();//creating a row
+            FillRow(aRow, aBooking);
+            dsMain.Tables[dataTable].Rows.Add(aRow);         //adding the row to the table
+        }
+
+        public void DataSetChange(Hotel aHotel)
+        {
+            String dataTable = "Hotel";
+            DataRow aRow = dsMain.Tables[dataTable].NewRow();//creating a row
+            FillRow(aRow, aHotel);
+            dsMain.Tables[dataTable].Rows.Add(aRow);         //adding the row to the table
+        }
+
+        public void DataSetChange(Room aRoom)
+        {
+            String dataTable = "Employee";
+            DataRow aRow = dsMain.Tables[dataTable].NewRow();//creating a row
+            FillRow(aRow, aRoom);
+            dsMain.Tables[dataTable].Rows.Add(aRow);         //adding the row to the table
+        }
+        #endregion
+
+
     }
 }

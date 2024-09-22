@@ -11,6 +11,7 @@ namespace phumla_kamnandi_83.business
         #region Data Fields
         private string hotelID_;
         private string name_;
+        private string location;
         private string address;
         private string phone_;
         private int noOfRooms;
@@ -20,6 +21,7 @@ namespace phumla_kamnandi_83.business
         #region Property Methods
         public string HotelID { get { return hotelID_; } set { hotelID_ = value; } }
         public string HotelName { get; set; }
+        public string Location { get { return location; } set { location = value; } }
         public string Address { get; set; }
         public string PhoneNumber { get; set; }
         public int NoOfRooms
