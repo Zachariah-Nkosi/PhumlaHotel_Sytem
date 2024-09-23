@@ -9,7 +9,7 @@ namespace phumla_kamnandi_83.business
     public class Booking
     {
         #region Data Fields
-        private int bookingId_;
+        private string bookingId_;
         private string empName_;
         private string roomNo;
         private string guestName_;
@@ -37,7 +37,7 @@ namespace phumla_kamnandi_83.business
         #endregion
 
         #region Property Methods
-        public int getBookingId { get {  return bookingId_; } set { bookingId_ = value; } }
+        public string getBookingId { get {  return bookingId_; } set { bookingId_ = value; } }
         public string getRoomNo { get { return roomNo; } set { roomNo = value; } }
         public string getEmployeeName { get { return empName_; } set { empName_ = value; } }
         public string getGuestName { get { return guestName_; } set { guestName_ = value; } }

@@ -26,17 +26,12 @@ namespace phumla_kamnandi_83.database
             {
                 
                 sqlConn = new SqlConnection(strConn);
-                sqlConn.Open();
-
                 dsMain = new DataSet();
 
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-            }finally
-            {
-                sqlConn.Close();
             }
         }
         #endregion
@@ -51,10 +46,9 @@ namespace phumla_kamnandi_83.database
                 dsMain.Clear();
 
                 dataAdapter.Fill(dsMain, aTable);
-
-                sqlConn.Close ();
-
-            }catch (Exception e)
+                sqlConn.Close();
+            }
+            catch (Exception e)
             {
                 MessageBox.Show (e.Message + " " + e.StackTrace);
             }
@@ -70,9 +64,10 @@ namespace phumla_kamnandi_83.database
                 sqlConn.Open();
 
                 dataAdapter.Update(dsMain, table);  //update database via data adapter
+                sqlConn.Close();
 
                 FillDataSet(sqlLocal, table);       //refresh the dataset
-
+                
                 success = true;
             }
             catch (Exception errObj)
@@ -82,7 +77,7 @@ namespace phumla_kamnandi_83.database
             }
             finally
             {
-                sqlConn.Close();
+                
             }
             return success;
         }

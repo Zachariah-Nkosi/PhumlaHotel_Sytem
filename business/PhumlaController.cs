@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace phumla_kamnandi_83.business
 {
@@ -50,6 +51,10 @@ namespace phumla_kamnandi_83.business
         {
             kamnandiDB.DataSetChange(guest);
             guests.Add(guest);
+            foreach (var gue in guests)
+            {
+                MessageBox.Show(" Guest: " + gue);
+            }
         }
 
         public void DataMaintenance(Hotel hotel)

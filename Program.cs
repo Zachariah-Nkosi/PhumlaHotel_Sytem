@@ -17,9 +17,10 @@ namespace phumla_kamnandi_83
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new HomePageForm());
+            //Application.Run(new HomePageForm());
             //Application.Run(new MDIMainDashBoardForm());
             //Application.Run(new BookingForm());
+            Application.Run(new GuestSigninAndLoginForm());
         }
     }
 }

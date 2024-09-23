@@ -26,7 +26,7 @@ namespace phumla_kamnandi_83.database
         private string sqlLocal2 = "SELECT * FROM Hotel";
         private string sqlLocal3 = "SELECT * FROM Room";
         private string sqlLocal4 = "SELECT * FROM Bookings";
-        private string sqlLocal5 = "SELECT * FROM Emplpoyee";
+        private string sqlLocal5 = "SELECT * FROM Employee";
 
         private Collection<Guest> guests;
         private Collection<Hotel> hotels;
@@ -154,10 +154,10 @@ namespace phumla_kamnandi_83.database
                         if (myRow.RowState != DataRowState.Deleted)
                         {
                             aBooking = new Booking();
-                            aBooking.getBookingId = Convert.ToInt32(myRow["BookingID"]);
+                            aBooking.getBookingId = Convert.ToString(myRow["BookingID"]).TrimEnd();
                             aBooking.getEmployeeName = Convert.ToString(myRow["EmployeeName"]).TrimEnd();
                             aBooking.getGuestName = Convert.ToString(myRow["GuestName"]).TrimEnd();
-                            aBooking.getNoOfGuests = Convert.ToInt16(myRow["NumberOfGuests"]);
+                            aBooking.getNoOfGuests = Convert.ToInt32(myRow["NumberOfGuests"]);
                             aBooking.getRoomNo = Convert.ToString(myRow["RoomNo"]).TrimEnd();
                             aBooking.getBookingDate = Convert.ToDateTime(myRow["BookingDate"]);
                             aBooking.getCheckInDate = Convert.ToDateTime(myRow["CheckInDate"]);
@@ -170,37 +170,50 @@ namespace phumla_kamnandi_83.database
                     break;
 
                 case "Room":
-                    aRoom = new Room();
-                    aRoom.ID = Convert.ToString(myRow["RoomNo"]).TrimEnd();
-                    aRoom.HotelID = Convert.ToString(myRow["HotelID"]).TrimEnd();
-                    aRoom.RoomType = Convert.ToString(myRow["RoomType"]).TrimEnd();
-                    aRoom.PricePerNight = Convert.ToDecimal(myRow["Price"]);
-                    rooms.Add(aRoom);
+                    foreach (DataRow myRow_loop_var in dsMain.Tables[table].Rows)
+                    {
+                        myRow = myRow_loop_var;
+                        if (myRow.RowState != DataRowState.Deleted)
+                        {
+                            aRoom = new Room();
+                            aRoom.ID = Convert.ToString(myRow["RoomNo"]).TrimEnd();
+                            aRoom.HotelID = Convert.ToString(myRow["HotelID"]).TrimEnd();
+                            aRoom.RoomType = Convert.ToString(myRow["RoomType"]).TrimEnd();
+                            aRoom.PricePerNight = Convert.ToDecimal(myRow["Price"]);
+                            rooms.Add(aRoom);
+                        }
+                    }
                     break;
                 case "Employee":
-                    anEmp = new Employee();
-                    anEmp.ID = Convert.ToString(myRow["ID"]).TrimEnd();
-                    anEmp.EmplID = Convert.ToString(myRow["ID"]).TrimEnd();
-                    anEmp.Password = Convert.ToString(myRow["Password"]);
-                    anEmp.Name = Convert.ToString(myRow["Name"]);
-                    anEmp.Address = Convert.ToString(myRow["Address"]);
-                    anEmp.Phone = Convert.ToString(myRow["Phone"]);
-                    //anEmp.RoleVal = (myRow["Role"]);
-                    string role = Convert.ToString(myRow["Role"]).TrimEnd();
-                    switch (role)
+                    foreach(DataRow myRow_loop_ in dsMain.Tables[table].Rows)
                     {
-                        case "NoRole":
-                            anEmp.RoleVal = Employee.Role.NoRole;
-                            break;
-                        case "Admin":
-                            anEmp.RoleVal = Employee.Role.Admin;
-                            break;
-                        case "Receptionist":
-                            anEmp.RoleVal = Employee.Role.Receptionist;
-                            break;
-                    }
+                        myRow = myRow_loop_;
+                        if (myRow.RowState != DataRowState.Deleted)
+                        {
+                            anEmp = new Employee();
+                            anEmp.ID = Convert.ToString(myRow["ID"]).TrimEnd();
+                            anEmp.EmplID = Convert.ToString(myRow["ID"]).TrimEnd();
+                            anEmp.Password = Convert.ToString(myRow["Password"]);
+                            anEmp.Name = Convert.ToString(myRow["Name"]);
+                            anEmp.Address = Convert.ToString(myRow["Address"]);
+                            anEmp.Phone = Convert.ToString(myRow["Phone"]);
+                            string role = Convert.ToString(myRow["Role"]).TrimEnd();
+                            switch (role)
+                            {
+                                case "NoRole":
+                                    anEmp.RoleVal = Employee.Role.NoRole;
+                                    break;
+                                case "Admin":
+                                    anEmp.RoleVal = Employee.Role.Admin;
+                                    break;
+                                case "Receptionist":
+                                    anEmp.RoleVal = Employee.Role.Receptionist;
+                                    break;
+                            }
 
-                    employees.Add(anEmp);
+                            employees.Add(anEmp);
+                        }
+                    }
                     break;
             }
         }
@@ -392,7 +405,10 @@ namespace phumla_kamnandi_83.database
             param = new SqlParameter("@KinName", SqlDbType.NVarChar, 50, "KinName");
             dataAdapter.InsertCommand.Parameters.Add(param);
 
-            param = new SqlParameter("@CardNo", SqlDbType.NVarChar, 20, "CardNo");
+            param = new SqlParameter("@KinCell", SqlDbType.NVarChar, 15, "KinCell");
+            dataAdapter.InsertCommand.Parameters.Add(param);
+
+            param = new SqlParameter("@CardNo", SqlDbType.NVarChar, 16, "CardNo");
             dataAdapter.InsertCommand.Parameters.Add(param);
         }
 
@@ -418,7 +434,7 @@ namespace phumla_kamnandi_83.database
         public void Build_INSERT_Parameters_Room()
         {
             SqlParameter param = default(SqlParameter);
-            param = new SqlParameter("@RoomNo", SqlDbType.NVarChar, 10, "RoomNo");
+            param = new SqlParameter("@RoomNo", SqlDbType.NVarChar, 5, "RoomNo");
             dataAdapter.InsertCommand.Parameters.Add(param);
 
             param = new SqlParameter("@HotelID", SqlDbType.NVarChar, 10, "HotelID");
