@@ -102,11 +102,18 @@ namespace phumla_kamnandi_83.presentation
         private void reg_btn_Click(object sender, EventArgs e)
         {
             PopulateObject();
-            MessageBox.Show("Guest added to database.");
+            
             phumlaController.DataMaintenance(guest);
-            phumlaController.FinalizeChangesGuest();
-            ClearAll();
-            ShowAll(false);     // After registering, lead to sign in
+            if (phumlaController.FinalizeChangesGuest())
+            {
+                MessageBox.Show("Guest added to database.");
+                ClearAll();
+                ShowAll(false);     // After registering, lead to sign in
+            }
+            else
+            {
+                MessageBox.Show("Failed to add guest. Please try again.");
+            }
         }
         // Sign in Button
         private void button1_Click(object sender, EventArgs e)

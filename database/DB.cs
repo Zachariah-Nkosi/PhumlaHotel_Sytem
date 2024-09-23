@@ -24,7 +24,6 @@ namespace phumla_kamnandi_83.database
         {
             try
             {
-                
                 sqlConn = new SqlConnection(strConn);
                 dsMain = new DataSet();
 
@@ -75,10 +74,7 @@ namespace phumla_kamnandi_83.database
                 MessageBox.Show(errObj.Message + " " + errObj.StackTrace);
                 success = false;
             }
-            finally
-            {
-                
-            }
+            
             return success;
         }
         #endregion

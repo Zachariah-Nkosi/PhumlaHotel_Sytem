@@ -100,7 +100,7 @@ namespace phumla_kamnandi_83.database
             return dsMain;
         }
 
-        public void Add2Collection (string table)
+        public void Add2Collection (string table)       //works perfect
         {
             DataRow myRow = null;
             Guest aGuest;
@@ -249,6 +249,7 @@ namespace phumla_kamnandi_83.database
             aRow["KinName"] = aGuest.KinName;
             aRow["KinCell"] = aGuest.KinPhone;
             aRow["CardNo"] = aGuest.Card;
+            MessageBox.Show("In FillRow, Guest: " + aGuest.Name);
         }
 
         public void FillRow(DataRow aRow, Room aRoom)
@@ -295,7 +296,8 @@ namespace phumla_kamnandi_83.database
         }
         public void DataSetChange(Guest aGuest)
         {
-            String dataTable = "Guest";
+            //String dataTable = "Guest";
+            String dataTable = table1;
             DataRow aRow = dsMain.Tables[dataTable].NewRow();//creating a row
             FillRow(aRow, aGuest);
             dsMain.Tables[dataTable].Rows.Add(aRow);         //adding the row to the table
@@ -312,6 +314,7 @@ namespace phumla_kamnandi_83.database
         public void DataSetChange(Hotel aHotel)
         {
             String dataTable = "Hotel";
+            //String dataTable = table1;
             DataRow aRow = dsMain.Tables[dataTable].NewRow();//creating a row
             FillRow(aRow, aHotel);
             dsMain.Tables[dataTable].Rows.Add(aRow);         //adding the row to the table

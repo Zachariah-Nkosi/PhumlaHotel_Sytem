@@ -49,11 +49,15 @@ namespace phumla_kamnandi_83.business
 
         public void DataMaintenance(Guest guest)
         {
-            kamnandiDB.DataSetChange(guest);
-            guests.Add(guest);
-            foreach (var gue in guests)
+            try
             {
-                MessageBox.Show(" Guest: " + gue);
+                kamnandiDB.DataSetChange(guest);
+                guests.Add(guest);
+                MessageBox.Show("Guest data processed successfully.");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error in DataMaintenance (Guest): " + ex.Message);
             }
         }
 
@@ -81,7 +85,9 @@ namespace phumla_kamnandi_83.business
         }
         public bool FinalizeChangesGuest()
         {
-            return kamnandiDB.UpdateDataSourceGuest();
+            bool result = kamnandiDB.UpdateDataSourceGuest();
+            MessageBox.Show("FinalizeChangesGuest executed. Success: " + result);
+            return result;
         }
         public bool FinalizeChangesHotel()
         {
