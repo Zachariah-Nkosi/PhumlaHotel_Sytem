@@ -3,10 +3,13 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static phumla_kamnandi_83.business.Employee;
+using System.Xml.Linq;
 
 namespace phumla_kamnandi_83.database
 {
@@ -159,6 +162,7 @@ namespace phumla_kamnandi_83.database
                             aBooking.getBookingDate = Convert.ToDateTime(myRow["BookingDate"]);
                             aBooking.getCheckInDate = Convert.ToDateTime(myRow["CheckInDate"]);
                             aBooking.getCheckOutDate = Convert.ToDateTime(myRow["CheckOutDate"]);
+                            aBooking.getTotalCost = Convert.ToDecimal(myRow["Price"]);
                             aBooking.getBookingStatus = Convert.ToString(myRow["Status"]).TrimEnd();
                             bookings.Add(aBooking);
                         }
@@ -264,11 +268,6 @@ namespace phumla_kamnandi_83.database
             aRow["Status"] = aBooking.getBookingStatus;
         }
 
-
-
-
-
-
         #endregion
 
         #region Database Operations CRUD
@@ -312,6 +311,197 @@ namespace phumla_kamnandi_83.database
             FillRow(aRow, aRoom);
             dsMain.Tables[dataTable].Rows.Add(aRow);         //adding the row to the table
         }
+        #endregion
+
+        #region Build Parameters, Create Commands & Update database
+        #region Build_INSERT_Parameters
+        public void Build_INSERT_Parameters_Book()
+        {
+            SqlParameter param = default(SqlParameter);
+            param = new SqlParameter("@BookingID", SqlDbType.NVarChar, 10, "BookingID");
+            dataAdapter.InsertCommand.Parameters.Add(param);
+
+            param = new SqlParameter("@EmployeeName", SqlDbType.NVarChar, 10, "EmployeeName");
+            dataAdapter.InsertCommand.Parameters.Add(param);
+
+            param = new SqlParameter("@GuestName", SqlDbType.NVarChar, 50, "GuestName");
+            dataAdapter.InsertCommand.Parameters.Add(param);
+
+            param = new SqlParameter("@NumberOfGuests", SqlDbType.Int, 32, "NumberOfGuests");
+            dataAdapter.InsertCommand.Parameters.Add(param);
+
+            param = new SqlParameter("@RoomNo", SqlDbType.NVarChar, 10, "RoomNo");
+            dataAdapter.InsertCommand.Parameters.Add(param);
+
+            param = new SqlParameter("@BookingDate", SqlDbType.Date, 30, "BookingDate");
+            dataAdapter.InsertCommand.Parameters.Add(param);
+
+            param = new SqlParameter("@CheckInDate", SqlDbType.Date, 30, "CheckInDate");
+            dataAdapter.InsertCommand.Parameters.Add(param);
+
+            param = new SqlParameter("@CheckOutDate", SqlDbType.Date, 30, "CheckOutDate");
+            dataAdapter.InsertCommand.Parameters.Add(param);
+
+            param = new SqlParameter("@Price", SqlDbType.Money, 8, "Price");
+            dataAdapter.InsertCommand.Parameters.Add(param);
+
+            param = new SqlParameter("@Status", SqlDbType.NVarChar, 20, "Status");
+            dataAdapter.InsertCommand.Parameters.Add(param);
+        }
+
+        public void Build_INSERT_Parameters_Emp()
+        {
+            SqlParameter param = default(SqlParameter);
+            param = new SqlParameter("@ID", SqlDbType.NVarChar, 10, "ID");
+            dataAdapter.InsertCommand.Parameters.Add(param);
+
+            param = new SqlParameter("@EmployeeID", SqlDbType.NVarChar, 10, "EmployeeID");
+            dataAdapter.InsertCommand.Parameters.Add(param);
+
+            param = new SqlParameter("@Password", SqlDbType.NVarChar, 15, "Password");
+            dataAdapter.InsertCommand.Parameters.Add(param);
+
+            param = new SqlParameter("@Name", SqlDbType.NVarChar, 50, "Name");
+            dataAdapter.InsertCommand.Parameters.Add(param);
+
+            param = new SqlParameter("@Address", SqlDbType.NVarChar, 80, "Address");
+            dataAdapter.InsertCommand.Parameters.Add(param);
+
+            param = new SqlParameter("@Phone", SqlDbType.NVarChar, 15, "Phone");
+            dataAdapter.InsertCommand.Parameters.Add(param);
+
+            param = new SqlParameter("@Role", SqlDbType.NVarChar, 15, "Role");
+            dataAdapter.InsertCommand.Parameters.Add(param);
+        }
+
+        public void Build_INSERT_Parameters_Guest()
+        {
+            SqlParameter param = default(SqlParameter);
+            param = new SqlParameter("@ID", SqlDbType.NVarChar, 10, "ID");
+            dataAdapter.InsertCommand.Parameters.Add(param);
+
+            param = new SqlParameter("@Name", SqlDbType.NVarChar, 50, "Name");
+            dataAdapter.InsertCommand.Parameters.Add(param);
+
+            param = new SqlParameter("@Address", SqlDbType.NVarChar, 80, "Address");
+            dataAdapter.InsertCommand.Parameters.Add(param);
+
+            param = new SqlParameter("@Phone", SqlDbType.NVarChar, 15, "Phone");
+            dataAdapter.InsertCommand.Parameters.Add(param);
+
+            param = new SqlParameter("@KinName", SqlDbType.NVarChar, 50, "KinName");
+            dataAdapter.InsertCommand.Parameters.Add(param);
+
+            param = new SqlParameter("@CardNo", SqlDbType.NVarChar, 20, "CardNo");
+            dataAdapter.InsertCommand.Parameters.Add(param);
+        }
+
+        public void Build_INSERT_Parameters_Hotel()
+        {
+            SqlParameter param = default(SqlParameter);
+            param = new SqlParameter("@HotelID", SqlDbType.NVarChar, 10, "HotelID");
+            dataAdapter.InsertCommand.Parameters.Add(param);
+
+            param = new SqlParameter("@HotelName", SqlDbType.NVarChar, 50, "HotelName");
+            dataAdapter.InsertCommand.Parameters.Add(param);
+
+            param = new SqlParameter("@Address", SqlDbType.NVarChar, 80, "Address");
+            dataAdapter.InsertCommand.Parameters.Add(param);
+
+            param = new SqlParameter("@Phone", SqlDbType.NVarChar, 15, "Phone");
+            dataAdapter.InsertCommand.Parameters.Add(param);
+
+            param = new SqlParameter("@NumOfRooms", SqlDbType.Int, 32, "NumOfRooms");
+            dataAdapter.InsertCommand.Parameters.Add(param);
+        }
+
+        public void Build_INSERT_Parameters_Room()
+        {
+            SqlParameter param = default(SqlParameter);
+            param = new SqlParameter("@RoomNo", SqlDbType.NVarChar, 10, "RoomNo");
+            dataAdapter.InsertCommand.Parameters.Add(param);
+
+            param = new SqlParameter("@HotelID", SqlDbType.NVarChar, 10, "HotelID");
+            dataAdapter.InsertCommand.Parameters.Add(param);
+
+            param = new SqlParameter("@RoomType", SqlDbType.NVarChar, 10, "RoomType");
+            dataAdapter.InsertCommand.Parameters.Add(param);
+
+            param = new SqlParameter("@Price", SqlDbType.Money, 8, "Price");
+            dataAdapter.InsertCommand.Parameters.Add(param);
+        }
+        #endregion
+
+        #region Create_INSERT_Command
+        public void Create_INSERT_Command_Book()
+        {
+            dataAdapter.InsertCommand = new SqlCommand("INSERT into Bookings (BookingID, EmployeeName, GuestName, NumberOfGuests, RoomNo, BookingDate, CheckInDate, CheckOutDate, Price, Status)VALUES(@IBookingID, @EmployeeName, @GuestName, @NumberOfGuests, @RoomNo, @BookingDate, @CheckInDate, @CheckOutDate, @Price, @Status)", sqlConn);
+            Build_INSERT_Parameters_Book();
+        }
+        public void Create_INSERT_Command_Emp()
+        {
+            dataAdapter.InsertCommand = new SqlCommand("INSERT into Employee (EmployeeID, Password, Name, Address, Phone, Role)VALUES(@EmployeeID, @Password, @Name, @Address, @Phone, @Role)", sqlConn);
+            Build_INSERT_Parameters_Emp();
+        }
+        public void Create_INSERT_Command_Guest()
+        {
+            dataAdapter.InsertCommand = new SqlCommand("INSERT into Guest (ID, Name, Address, Phone, KinName, KinCell, CardNo)VALUES(@ID, @Name, @Address, @Phone, @KinName, @KinCell, @CardNo)", sqlConn);
+            Build_INSERT_Parameters_Guest();
+        }
+        public void Create_INSERT_Command_Hotel()
+        {
+            dataAdapter.InsertCommand = new SqlCommand("INSERT into Hotel (HotelID, HotelName, Location, Address, Phone, NumOfRooms)VALUES(@HotelID, @HotelName, @Location, @Address, @Phone, @NumOfRooms)", sqlConn);
+            Build_INSERT_Parameters_Hotel();
+        }
+        public void Create_INSERT_Command_Room()
+        {
+            dataAdapter.InsertCommand = new SqlCommand("INSERT into Hotel (RoomNo, HotelID, RoomType, Price)VALUES(@RoomNo, @HotelID, @RoomType, @Price)", sqlConn);
+            Build_INSERT_Parameters_Room();
+        }
+        #endregion
+
+        #region UpdateDataSource
+        public bool UpdateDataSourceBook()
+        {
+            bool success = true;
+            Create_INSERT_Command_Book();
+            success = UpdateDataSource(sqlLocal4, table4);
+            return success;
+        }
+
+        public bool UpdateDataSourceEmp()
+        {
+            bool success = true;
+            Create_INSERT_Command_Emp();
+            success = UpdateDataSource(sqlLocal5, table5);
+            return success ;
+        }
+
+        public bool UpdateDataSourceRoom()
+        {
+            bool success = true;
+            Create_INSERT_Command_Room();
+            success = UpdateDataSource(sqlLocal3, table3);
+            return success ;
+        }
+
+        public bool UpdateDataSourceGuest()
+        {
+            bool success = true;
+            Create_INSERT_Command_Guest();
+            success = UpdateDataSource(sqlLocal1, table1);
+            return success ;
+        }
+
+        public bool UpdateDataSourceHotel()
+        {
+            bool success = true ;
+            Create_INSERT_Command_Hotel();
+            success = UpdateDataSource(sqlLocal2, table2);
+            return success ;
+        }
+        #endregion
+
         #endregion
 
 

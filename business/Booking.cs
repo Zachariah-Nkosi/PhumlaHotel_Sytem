@@ -44,7 +44,7 @@ namespace phumla_kamnandi_83.business
         public DateTime getCheckInDate { get { return checkInDate_; } set { checkInDate_ = value; } }
         public DateTime getCheckOutDate { get {return checkOutDate_; } set {checkOutDate_ = value; } }
         public DateTime getBookingDate { get { return bookingDate; } set { bookingDate = value; } }
-        public decimal getTotalCost() { return totalCost_; }
+        public decimal getTotalCost { get { return totalCost_; } set { totalCost_ = value; } } 
         public string getBookingStatus { get { return bookingStatus_; } set { bookingStatus_ = value; } }
 
 
