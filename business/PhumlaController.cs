@@ -54,6 +54,10 @@ namespace phumla_kamnandi_83.business
                 kamnandiDB.DataSetChange(guest);
                 guests.Add(guest);
                 MessageBox.Show("Guest data processed successfully.");
+                foreach (var item in guests)
+                {
+                    MessageBox.Show("Test Add2Collection: "+item.Name);
+                }
             }
             catch (Exception ex)
             {

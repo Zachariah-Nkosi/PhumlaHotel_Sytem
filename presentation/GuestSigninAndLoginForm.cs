@@ -52,6 +52,7 @@ namespace phumla_kamnandi_83.presentation
             kinPhone_txt_new .Visible=value;
 
             reg_btn.Visible=value;
+            cancel_btn.Visible=value;
 
             //false show existing
             signIn_ID_lbl.Visible = !value;

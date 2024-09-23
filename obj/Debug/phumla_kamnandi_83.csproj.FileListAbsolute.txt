@@ -76,8 +76,6 @@ C:\Users\Neliswa Dlamini\Downloads\PhumlaHotel_Sytem\obj\Debug\phumla_kamnandi_8
 C:\Users\Neliswa Dlamini\Downloads\PhumlaHotel_Sytem\obj\Debug\phumla_kamnandi_83.csproj.CoreCompileInputs.cache
 C:\Users\Neliswa Dlamini\Downloads\PhumlaHotel_Sytem\obj\Debug\phumla_kamnandi_83.exe
 C:\Users\Neliswa Dlamini\Downloads\PhumlaHotel_Sytem\obj\Debug\phumla_kamnandi_83.pdb
-C:\Users\Student\Desktop\mngnta\PhumlaHotel_Sytem\bin\Debug\PhumlaKamnandiDatabase.mdf
-C:\Users\Student\Desktop\mngnta\PhumlaHotel_Sytem\bin\Debug\PhumlaKamnandiDatabase_log.ldf
 C:\Users\Student\Desktop\mngnta\PhumlaHotel_Sytem\bin\Debug\phumla_kamnandi_83.exe.config
 C:\Users\Student\Desktop\mngnta\PhumlaHotel_Sytem\bin\Debug\phumla_kamnandi_83.exe
 C:\Users\Student\Desktop\mngnta\PhumlaHotel_Sytem\bin\Debug\phumla_kamnandi_83.pdb
@@ -93,3 +91,5 @@ C:\Users\Student\Desktop\mngnta\PhumlaHotel_Sytem\obj\Debug\phumla_kamnandi_83.c
 C:\Users\Student\Desktop\mngnta\PhumlaHotel_Sytem\obj\Debug\phumla_kamnandi_83.csproj.CoreCompileInputs.cache
 C:\Users\Student\Desktop\mngnta\PhumlaHotel_Sytem\obj\Debug\phumla_kamnandi_83.exe
 C:\Users\Student\Desktop\mngnta\PhumlaHotel_Sytem\obj\Debug\phumla_kamnandi_83.pdb
+C:\Users\Student\Desktop\mngnta\PhumlaHotel_Sytem\bin\Debug\PhumlaKamnandiDatabase.mdf
+C:\Users\Student\Desktop\mngnta\PhumlaHotel_Sytem\bin\Debug\PhumlaKamnandiDatabase_log.ldf
