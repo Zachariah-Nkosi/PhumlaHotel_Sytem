@@ -36,7 +36,7 @@ namespace phumla_kamnandi_83.database
         #endregion
 
         #region Property Methods
-        public Collection<Guest> AllGuest
+        public Collection<Guest> AllGuests
         {
             get { return guests; }
             set { guests = value; }
